@@ -1,6 +1,5 @@
 # NanoPi NEO / OrangePi PC
 
-This is the base Nerves System configuration for the [NanoPi Neo](http://wiki.friendlyarm.com/wiki/index.php/NanoPi_NEO). It
-also works on the [OrangePi PC](http://www.orangepi.org/orangepipc/), which is very nearly the same thing.
+This is the base Nerves System configuration for the [Orange Pi Pc Plus](http://www.orangepi.org/orangepipcplus/).
 
-Both boards are based on the Allwinner H3 SoC, so any new boards using this SoC should be able to be ported without too much fuss.
+At this time, do not trust this repo. I have not tested anything yet. Awaiting test boards to show up soon.
