@@ -1,6 +1,7 @@
-defmodule NervesSystemOrangePiPcPlus.Mixfile do
+defmodule NervesSystemOrangepiPcplus.Mixfile do
   use Mix.Project
 
+  @app :nerves_system_orangepi_pcplus
   @version Path.join(__DIR__, "VERSION")
     |> File.read!
     |> String.strip
