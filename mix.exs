@@ -1,4 +1,4 @@
-defmodule NervesSystemNanopiNeo.Mixfile do
+defmodule NervesSystemOrangePiPcPlus.Mixfile do
   use Mix.Project
 
   @version Path.join(__DIR__, "VERSION")
@@ -6,9 +6,9 @@ defmodule NervesSystemNanopiNeo.Mixfile do
     |> String.strip
 
   def project do
-    [app: :nerves_system_nanopi_neo,
+    [app: :nerves_system_orangepi_pcplus,
      version: @version,
-     elixir: "~> 1.3",
+     elixir: "~> 1.6",
      compilers: Mix.compilers ++ [:nerves_package],
      description: description(),
      package: package(),
@@ -22,24 +22,24 @@ defmodule NervesSystemNanopiNeo.Mixfile do
   end
 
   defp deps do
-    [{:nerves, "~> 0.5.1", runtime: false},
-     {:nerves_system_br, "~> 0.10.1", runtime: false},
-     {:nerves_toolchain_arm_unknown_linux_gnueabihf, "~> 0.10.0", runtime: false}]
+    [{:nerves, "~> 1.0", runtime: false},
+     {:nerves_system_br, "~> 1.0", runtime: false},
+     {:nerves_toolchain_arm_unknown_linux_gnueabihf, "~> 1.0", runtime: false}]
   end
 
   defp description do
     """
-    Nerves System - NanoPi NEO
+    Nerves System - Orange Pi PC Plus
     """
   end
 
   defp package do
-    [maintainers: ["David Hanson"],
+    [maintainers: ["Steven Critchfield"],
      files: ["rootfs-additions", "busybox_defconfig", "LICENSE",
              "mix.exs", "nerves_defconfig", "nerves.exs", "README.md",
              "VERSION", "fwup.conf", "post-createfs.sh", "uboot",
              "uboot-script.cmd", "linux"],
      licenses: ["Apache 2.0"],
-     links: %{"Github" => "https://github.com/dhanson358/nerves_system_nanopi_neo"}]
+     links: %{"Github" => "https://github.com/critch/nerves_system_orangepi_pcplus/blob/master/mix.exs"}]
   end
 end

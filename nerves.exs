@@ -5,13 +5,13 @@ version =
   |> File.read!
   |> String.strip
 
-pkg = "nerves_system_nanopi_neo"
+pkg = "nerves_system_prangepi_pcplus"
 
-config :nerves_system_nanopi_neo, :nerves_env,
+config :nerves_system_orangepi_pcplus, :nerves_env,
   type: :system,
   version: version,
   compiler: :nerves_package,
-  artifact_url: ["https://github.com/dhanson358/#{pkg}/releases/download/v#{version}/#{pkg}-#{version}.tar.gz"],
+  #artifact_url: ["https://github.com/dhanson358/#{pkg}/releases/download/v#{version}/#{pkg}-#{version}.tar.gz"],
   platform: Nerves.System.BR,
   platform_config: [
    defconfig: "nerves_defconfig",
