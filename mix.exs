@@ -6,14 +6,17 @@ defmodule NervesSystemOrangePiPcPlus.Mixfile do
     |> String.strip
 
   def project do
-    [app: :nerves_system_orangepi_pcplus,
-     version: @version,
-     elixir: "~> 1.6",
-     compilers: Mix.compilers ++ [:nerves_package],
-     description: description(),
-     package: package(),
-     deps: deps(),
-     aliases: ["deps.precompile": ["nerves.env", "deps.precompile"]]
+    [
+      app: @app,
+      version: @version,
+      elixir: "~> 1.4",
+      compilers: Mix.compilers() ++ [:nerves_package],
+      nerves_package: nerves_package(),
+      description: description(),
+      package: package(),
+      deps: deps(),
+      aliases: [loadconfig: [&bootstrap/1], docs: ["docs", &copy_images/1]],
+      docs: [extras: ["README.md"], main: "readme"]
    ]
   end
 
@@ -21,10 +24,32 @@ defmodule NervesSystemOrangePiPcPlus.Mixfile do
     []
   end
 
+  defp bootstrap(args) do
+    System.put_env("MIX_TARGET", "orangepi_pcplus")
+    Application.start(:nerves_bootstrap)
+    Mix.Task.run("loadconfig", args)
+  end
+
+  defp nerves_package do
+    [
+      type: :system,
+      artifact_sites: [
+        {:github_releases, "nerves-project/#{@app}"}
+      ],
+      platform: Nerves.System.BR,
+      platform_config: [
+        defconfig: "nerves_defconfig"
+      ],
+      checksum: package_files()
+    ]
+  end
+
   defp deps do
     [{:nerves, "~> 1.0", runtime: false},
      {:nerves_system_br, "~> 1.0", runtime: false},
-     {:nerves_toolchain_arm_unknown_linux_gnueabihf, "~> 1.0", runtime: false}]
+     {:nerves_toolchain_arm_unknown_linux_gnueabihf, "~> 1.0", runtime: false},
+     {:nerves_system_linter, "~> 0.3.0", runtime: false},
+    ]
   end
 
   defp description do
@@ -35,11 +60,30 @@ defmodule NervesSystemOrangePiPcPlus.Mixfile do
 
   defp package do
     [maintainers: ["Steven Critchfield"],
-     files: ["rootfs-additions", "busybox_defconfig", "LICENSE",
-             "mix.exs", "nerves_defconfig", "nerves.exs", "README.md",
-             "VERSION", "fwup.conf", "post-createfs.sh", "uboot",
-             "uboot-script.cmd", "linux"],
+     files: package_files(),
      licenses: ["Apache 2.0"],
      links: %{"Github" => "https://github.com/critch/nerves_system_orangepi_pcplus/blob/master/mix.exs"}]
+  end
+
+  defp package_files do
+    [
+      "rootfs-additions", 
+      "busybox_defconfig", 
+      "LICENSE",
+      "mix.exs", 
+      "nerves_defconfig", 
+      "nerves.exs", 
+      "README.md",
+      "VERSION", 
+      "fwup.conf", 
+      "post-createfs.sh", 
+      "uboot",
+      "uboot-script.cmd", 
+      "linux"
+    ]
+  end
+
+  defp copy_images(_) do
+    File.cp_r("assets", "doc/assets")
   end
 end

@@ -1,6 +1,10 @@
 /_build
 /cover
 /deps
+/doc/
+/.fetch
+/.nerves
 erl_crash.dump
 *.ez
 build.log
+archive.log
