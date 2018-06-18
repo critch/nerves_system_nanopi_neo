@@ -1,4 +1,4 @@
-# NanoPi NEO / OrangePi PC
+# OrangePi PC Plus
 
 This is the base Nerves System configuration for the [Orange Pi Pc Plus](http://www.orangepi.org/orangepipcplus/).
 
